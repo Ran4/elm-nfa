@@ -29,10 +29,6 @@ type Σ
     | TurnOff
 
 
-
--- Translation function
-
-
 trans : Σ -> Q -> Q
 trans input q =
     case ( input, q ) of
@@ -43,27 +39,27 @@ trans input q =
             Off
 
 
+inFinalState : Q -> List Q -> Bool
+inFinalState q finalStates =
+    List.member q finalStates
+
+
+finalStates : List Q
+finalStates =
+    [ On ]
+
+
 
 -- Initial state
+
+
+type alias Model =
+    Q
 
 
 q0 : Q
 q0 =
     Off
-
-
-f : List Q
-f =
-    [ On ]
-
-
-inFinalState : Q -> List Q -> Bool
-inFinalState q f =
-    List.member q f
-
-
-type alias Model =
-    Q
 
 
 init : ( Model, Cmd Msg )
@@ -117,12 +113,12 @@ subscriptions model =
 
 
 -- VIEW
--- createButton : Σ -> Html a
 
 
 createButton : Σ -> Html Msg
 createButton input =
-    Html.button [ Html.Events.onClick <| SendInput input ] [ Html.text <| getInputRepr input ]
+    Html.button [ Html.Events.onClick <| SendInput input ]
+        [ Html.text <| getInputRepr input ]
 
 
 view : Model -> Html Msg
@@ -130,7 +126,7 @@ view model =
     Html.div []
         [ Html.text <| "State: " ++ getStateRepr model
         , Html.text
-            <| if inFinalState model f then
+            <| if inFinalState model finalStates then
                 " (Final state!)"
                else
                 ""
