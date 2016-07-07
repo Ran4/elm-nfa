@@ -1,6 +1,6 @@
 # elm-trivial-nfa
 
-A very simple implementation of a Nondeterministic Finite Automaton (NFA) written in [elm](http://elm-lang.org).
+A very simple implementation of a [Nondeterministic Finite Automaton](https://en.wikipedia.org/wiki/Nondeterministic_finite_automaton) (NFA) written in [elm](http://elm-lang.org).
 
 ### Run instructions:
 
